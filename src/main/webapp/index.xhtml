@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+    <h:form prependId="false">
+        <p:button value="Seite OHNE Ajax neu laden" href="/" />
+        <p:commandButton value="Seite MIT Ajax neu laden" update=":dt" ajax="true" />
+
+        <!-- Die initiale Sortierung wird durch das Attribut sortBy festgelegt. -->
+        <!-- Nach dem Laden der Seite ist die Tabelle nach e.feld2 sortiert. -->
+        <p:dataTable id="dt" value="#{bean.dataModel}" var="e" sortBy="#{e.feld2}">
+            <p:column headerText="Feld1" sortBy="#{e.feld1}">
+                <h:outputText value="#{e.feld1}" />
+            </p:column>
+            <p:column headerText="Feld2" sortBy="#{e.feld2}">
+                <h:outputText value="#{e.feld2}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+</h:body>
+</html>
