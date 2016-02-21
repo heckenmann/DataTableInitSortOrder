@@ -1,5 +1,6 @@
 package de.heckenmann.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import de.heckenmann.BeispielEntity;
 
 @Named
 @RequestScoped
-public class Bean {
+public class Bean implements Serializable {
 
     private final DataModel<BeispielEntity> dataModel;
 

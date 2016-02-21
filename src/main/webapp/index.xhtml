@@ -1,26 +1,75 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+    <style type="text/css">
+body {
+	font-size: 0.9em;
+}
 
+.ui-panel {
+	margin-top: 15px;
+}
+</style>
 </h:head>
 
 <h:body>
+    <p:button value="Seite OHNE Ajax neu laden" href="/" />
+    <p:panel header="DataTable mit DataModel unsortiert">
+        <h:form>
+            <p:commandButton value="Form MIT Ajax neu laden" update="@form" ajax="true" />
 
-    <h:form prependId="false">
-        <p:button value="Seite OHNE Ajax neu laden" href="/" />
-        <p:commandButton value="Seite MIT Ajax neu laden" update=":dt" ajax="true" />
+            <p:dataTable id="dt" value="#{bean.dataModel}" var="e">
+                <p:column headerText="Feld1" sortBy="#{e.feld1}">
+                    <h:outputText value="#{e.feld1}" />
+                </p:column>
+                <p:column headerText="Feld2" sortBy="#{e.feld2}">
+                    <h:outputText value="#{e.feld2}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:panel>
+    <p:panel header="DataTable mit DataModel sortiert nach Feld1">
+        <h:form>
+            <p:commandButton value="Form MIT Ajax neu laden" update="@form" ajax="true" />
 
-        <!-- Die initiale Sortierung wird durch das Attribut sortBy festgelegt. -->
-        <!-- Nach dem Laden der Seite ist die Tabelle nach e.feld2 sortiert. -->
-        <p:dataTable id="dt" value="#{bean.dataModel}" var="e" sortBy="#{e.feld2}">
-            <p:column headerText="Feld1" sortBy="#{e.feld1}">
-                <h:outputText value="#{e.feld1}" />
-            </p:column>
-            <p:column headerText="Feld2" sortBy="#{e.feld2}">
-                <h:outputText value="#{e.feld2}" />
-            </p:column>
-        </p:dataTable>
-    </h:form>
+            <!-- Die initiale Sortierung wird durch das Attribut sortBy festgelegt. -->
+            <!-- Nach dem Laden der Seite ist die Tabelle nach e.feld2 sortiert. -->
+            <p:dataTable id="dt" value="#{bean.dataModel}" var="e" sortBy="#{e.feld1}">
+                <p:column headerText="Feld1" sortBy="#{e.feld1}">
+                    <h:outputText value="#{e.feld1}" />
+                </p:column>
+                <p:column headerText="Feld2" sortBy="#{e.feld2}">
+                    <h:outputText value="#{e.feld2}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:panel>
+    <p:panel header="DataTable mit LazyDataModel sortiert nach Feld2">
+        <h:form>
+            <p:commandButton value="Form MIT Ajax neu laden" update="@form" ajax="true" />
+            <p:dataTable lazy="true" value="#{lazyDataModelBean.ldm}" var="e" sortBy="#{e.feld2}" rows="10">
+                <p:column headerText="Feld1" sortBy="#{e.feld1}">
+                    <h:outputText value="#{e.feld1}" />
+                </p:column>
+                <p:column headerText="Feld2" sortBy="#{e.feld2}">
+                    <h:outputText value="#{e.feld2}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:panel>
 
+    <p:panel header="DataTable mit LazyDataModel absteigend sortiert nach Feld2">
+        <h:form>
+            <p:commandButton value="Form MIT Ajax neu laden" update="@form" ajax="true" />
+            <p:dataTable lazy="true" value="#{lazyDataModelBean.ldm}" var="e" sortBy="#{e.feld2}" sortOrder="descending" rows="10">
+                <p:column headerText="Feld1" sortBy="#{e.feld1}">
+                    <h:outputText value="#{e.feld1}" />
+                </p:column>
+                <p:column headerText="Feld2" sortBy="#{e.feld2}">
+                    <h:outputText value="#{e.feld2}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:panel>
 </h:body>
 </html>
